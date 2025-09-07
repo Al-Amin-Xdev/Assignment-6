@@ -4,3 +4,7 @@
   margin: 0 auto;   /* centers the container */
   padding: 0 16px;
 }
+
+.list-disc{
+    list-style-type: disc;
+}
