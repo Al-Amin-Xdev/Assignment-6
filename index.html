@@ -58,28 +58,98 @@
 
     </div>
 
-    <!-- Grid section ( Use Java Script on this Section) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Dynamic Container below ( Use Java Script on this Section) -->
 
     <h1 class="text-center m-3 font-bold md:text-2xl">Choose Your Trees</h1>
     
-    <div class="parent-container mt-2 bg-[#CFF0DC] w-full h-auto max-w-[1000px] mx-auto border flex flex-col gap-1 p-2 md:flex-row justify-center p-2 ">
+    <div class="parent-container mt-2 bg-[#CFF0DC] w-full h-auto max-w-[1200px] mx-auto border flex flex-col gap-1 p-2 md:flex-row justify-center ">
 
+        <!-- Column-1 -->
 
-        <div class="category bg-white rounded-md w-full mx-auto border h-[400px] md:w-1/6">
-            <h1>Cat</h1>
+        <div id="cat" class="category bg-white rounded-md w-full mx-auto border h-[450px] md:w-[500px] ">
+            
+            <!-- <div class="button bg-green-800 m-1 p-2 rounded-md">
+                <button class="font-bold text-white " >Something</button>
+            </div> -->
+
         </div>
 
 
-        <div class="tres-container bg-white rounded-md  w-full h-auto border flex  h-[300px] md:w-full ">
-            <h1>tree</h1>
+        <!-- Use java script on this tres container-2 -->
+
+        <div id="tree-data" class="tres-container bg-white rounded-md p-2 w-auto h-auto border flex flex-col gap-1 md:grid grid-cols-3 justify-center">
+
+            <!-- Cards are laid down properly -->
+
+            <!-- <div class="card-1 p-1 border-2 w-full h-[330px] rounded-md md:w-full ">
+
+                <img class=" w-full h-[150px] bg-cover rounded-md" src="./assets/about.png" alt="">
+
+                <h1 class="text-sm font-bold my-1" >Tree Name</h1>
+
+                <p class="text-xs text-justify" >A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green</p>
+
+                <div class="tree-type flex flex-row  justify-between mt-2 p-1">
+                    <span class="text-xs font-bold bg-green-600 rounded-md px-2" >Tree Type</span>
+                    <span class="text-xs font-bold" >Price</span>
+                </div>
+                
+                <div class="card-button flex justify-center mt-4">
+                    <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >Add to Cart</button>
+                </div>
+
+            </div> -->
+
+
         </div>
 
 
-        <div class="cart bg-white rounded-md w-full  border h-[500px] md:w-1/6 ">
+        <!-- Cart-count column-3 -->
+
+        <div class="cart bg-white rounded-md w-full  border h-[500px] md:w-[500px] ">
             <h1>cart</h1>
         </div>
 
     </div>
+
+    <!-- Dynamic Container above ( Use Java Script on this Section) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Campaign Section -->
     
@@ -167,5 +237,7 @@
     </div>
     
 
+
+    <script src="script.js"></script>
 </body>
 </html>
