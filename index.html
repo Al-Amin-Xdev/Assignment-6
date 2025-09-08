@@ -59,23 +59,6 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Dynamic Container below ( Use Java Script on this Section) -->
 
     <h1 class="text-center m-3 font-bold md:text-2xl">Choose Your Trees</h1>
@@ -86,7 +69,7 @@
 
         <div id="cat" class="category bg-white rounded-md w-full mx-auto border h-[450px] md:w-[500px] ">
             
-            <!-- <div class="button bg-green-800 m-1 p-2 rounded-md">
+            <!-- <div class="button bg-green-600 m-1 p-2 rounded-md">
                 <button class="font-bold text-white " >Something</button>
             </div> -->
 
@@ -124,29 +107,27 @@
 
         <!-- Cart-count column-3 -->
 
-        <div class="cart bg-white rounded-md w-full  border h-[500px] md:w-[500px] ">
-            <h1>cart</h1>
+        <div id="cart-box" class="cart bg-white rounded-md w-full  border h-[500px] md:w-[500px] ">
+
+                <h1 class="font-bold text-left ml-1" >Added Carts</h1>
+            
+
+            <!-- <div class="cart-list p-1 bg- bg-green-400 rounded-md m-1">
+
+                <div class="top font-bold flex justify-between shadow-2xl md:min-w-[80px]">
+                    <h1 class="text-[15px] md:text-xs">Plant Name </h1>
+                    <button><i class="fa-solid fa-square-xmark"></i></button>
+                </div>
+                <h1 class="font-bold text-right md:text-xs" >price Tk</h1>
+            </div> -->
+
+            <h1 id="total-display" class="font-bold text-center text-xs mt-2">Total:<span>tk</span></h1>
+
         </div>
 
     </div>
 
     <!-- Dynamic Container above ( Use Java Script on this Section) -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -235,6 +216,25 @@
 
         <h1 class="text-center font-bold text-white" >© 2025 Green Earth. All Rights Reserved.</h1>
     </div>
+
+
+    <!-- modal -->
+
+    <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+
+            <h3 class="text-lg font-bold">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+
+            <div class="modal-action">
+            <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+            </form>
+            </div>
+        </div>
+        </dialog>
     
 
 

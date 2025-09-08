@@ -1,4 +1,5 @@
 
+
 // Loading the category dynamically 
 
 let categoryApi = "https://openapi.programming-hero.com/api/categories";
@@ -27,7 +28,7 @@ async function loadCategory (url) {
 
             let newlyCreatedDiv = document.createElement('div');
 
-            newlyCreatedDiv.innerHTML = `<div onclick="getCatIdOnly(${arrId})" class="button bg-green-800 m-1 p-2 rounded-md">
+            newlyCreatedDiv.innerHTML = `<div onclick="getCatIdOnly(${arrId})" class="button bg-green-600 m-1 p-2 rounded-md">
                 <button  class="font-bold text-white text-xs text-left " >${allCategoryName}</button>
             </div>`
             getCategoryDiv.appendChild(newlyCreatedDiv);
@@ -68,6 +69,8 @@ async function loadAllPlant (url) {
             let plantDescription = arrayItem.description;
             let plantCategory = arrayItem.category;
             let plantPrice = arrayItem.price;
+            let itemid = arrayItem.id;
+            
 
 
             let getTreeDataDiv = document.getElementById('tree-data');
@@ -87,14 +90,16 @@ async function loadAllPlant (url) {
                     <span class="text-xs font-bold" >${plantPrice}</span>
                 </div>
                 
-                <div class="card-button flex justify-center mt-4">
+                <div id="btndiv-${itemid}" onclick="getprice(${plantPrice}); addToCart('${plantNam}', ${plantPrice})" class="card-button flex justify-center mt-4">
                     <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >Add to Cart</button>
                 </div>
 
             </div>`;
-
+    
             getTreeDataDiv.appendChild(newlyCreatedDivForTreeData);
+        
 
+           
         });
 
     } catch (error) {
@@ -104,6 +109,142 @@ async function loadAllPlant (url) {
 }
 
 loadAllPlant (allPlantApi);
+
+// get the price
+
+let pricarray = [];
+
+
+function getprice(price){
+    // Ensure numeric value
+    pricarray.push(Number(price));
+
+    let total = 0;
+
+    for(let p of pricarray){
+        total += p;
+    }
+
+    let getCartheading = document.getElementById('total-display');
+    // console.log(getCartDiv);
+    getCartheading.innerText = total;
+
+    // removeCart(total);
+    
+};
+
+
+
+// add to cart function
+
+let rempricearr = [];
+
+console.log(rempricearr);
+
+function addToCart(name, price) {
+
+            let getCartDiv = document.getElementById('cart-box');
+            // console.log(getCartDiv);
+            let createdDiv = document.createElement('div');
+            
+            createdDiv.innerHTML = `<div class="cart-list p-1 bg- bg-green-400 rounded-md m-1">
+
+                <div class="top font-bold flex justify-between shadow-2xl md:min-w-[80px]">
+                    <h1 class="text-[15px] md:text-xs">${name} </h1>
+                    <button><i class="fa-solid fa-square-xmark"></i></button>
+                </div>
+                <h1 class="cart-price font-bold text-right md:text-xs" >${price} Tk</h1>
+            </div>`;
+
+            getCartDiv.appendChild(createdDiv);
+
+             const cartBox = document.getElementById("cart-box");
+
+            cartBox.addEventListener("click", (event) => {
+
+    // check if  icon clicked
+
+             if (event.target.classList.contains("fa-square-xmark")) {
+
+        // remove only the nearest .cart-list
+
+            const listItem = event.target.closest(".cart-list");
+            if (listItem) {
+
+                
+
+                const priceElem = listItem.querySelector(".cart-price");
+                const rprice = priceElem ? parseInt(priceElem.innerText) : 0;
+
+                rempricearr.push(Number(rprice));
+                // console.log(rempricearr);
+
+                const rtotal = rempricearr.reduce((sum, p) => sum + p, 0);
+                // console.log("Removed total:", typeof rtotal);
+
+                listItem.remove();
+
+                
+                // const totalDisplay = document.getElementById("total-display");
+                // totalDisplay.innerText = remaing ;
+
+            }
+        }
+        
+    });         
+
+};
+
+
+
+// Removing the cart completed it stays right here no need to move into a function to call
+
+
+
+
+
+// function removeCart(totalp) {
+
+//     const cartBox = document.getElementById("cart-box");
+
+//     cartBox.addEventListener("click", (event) => {
+
+//     // check if  icon clicked
+
+//         if (event.target.classList.contains("fa-square-xmark")) {
+
+//         // remove only the nearest .cart-list
+
+//             const listItem = event.target.closest(".cart-list");
+//             if (listItem) {
+
+                
+
+//                 const priceElem = listItem.querySelector(".cart-price");
+//                 const rprice = priceElem ? parseInt(priceElem.innerText) : 0;
+
+//                 rempricearr.push(Number(rprice));
+
+//                 const rtotal = rempricearr.reduce((sum, p) => sum + p, 0);
+//                 console.log("Removed total:", rtotal);
+
+//                 listItem.remove();
+
+                
+//                 // const totalDisplay = document.getElementById("total-display");
+//                 // totalDisplay.innerText = remaing ;
+
+//             }
+//         }
+        
+//     });
+
+// };
+
+
+
+
+// removeCart();
 
 
 
@@ -174,5 +315,8 @@ async function getCatIdOnly(id) {
         console.log("Error message: ", error);
     }
     
-}
+};
+
+
+
 
