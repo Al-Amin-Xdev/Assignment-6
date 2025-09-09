@@ -1,4 +1,5 @@
 
+
 // Updating pric and removing the cart
 
 let priceArray = []; // All the price has been stored
@@ -43,7 +44,7 @@ let addAndSum = (Name, Price, id) =>{
                     <h1 class="text-[15px] md:text-xs">${Name}</h1>
                     <button id="cross-btn-${Price}" ><i onclick="updateCartBox(${Price});removeCart(${id})" class="fa-solid fa-square-xmark"></i></button>
                 </div>
-                <h1 class="font-bold text-letf md:text-xs" >${Price}<span> tk</span> </h1>
+                <h1 class="font-bold text-letf md:text-xs" >${Price} tk</h1>
             </div>`;
     
     // Append the child div to parent dive
@@ -105,7 +106,7 @@ let displayPlants = (treearr) =>{
 
 
         let newDiv = document.createElement('div');
-        newDiv.innerHTML = `<div class="card-1 p-1  border-2 w-full h-[450px] rounded-md md:w-full ">
+        newDiv.innerHTML = `<div class="card-1 p-1  border-1 border-violet-700 w-full h-[450px] rounded-md md:w-full ">
 
                 <img class=" w-full h-[250px] bg-cover rounded-md" src="${pImg}" alt="">
 
