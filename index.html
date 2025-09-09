@@ -15,6 +15,10 @@
 
      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+     <!-- Daisy UI cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 <body class="bg-[#CFF0DC]">
 
@@ -223,8 +227,29 @@
 
 
     <!-- Modals -->
+<!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box ">
+    <div id="modal-container" class=" mx-auto flex justify-center items-center">
 
+        <!-- <div class="Info  px-2 ">
+            <h1 class="font-bold text-lg" >Tree Name</h1>
+            <img class="w-[250px] h-[200px] border border-green-950 " src="./assets/about.png" alt="">
+            <h1 class="font-bold" >Cetegory</h1>
+            <h1 class="text-sm font-bold">Price: <span></span> tk</h1>
+            <p class="text-xs my-2 text-justify">Description</p>
+        </div> -->
 
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  
+</dialog>
 
 
 

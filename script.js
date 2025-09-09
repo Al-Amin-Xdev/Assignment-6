@@ -1,4 +1,32 @@
 
+// Modal Information Display
+
+let displayModalData = (NameModal, ImgModal, CategoryNameModal, PriceModal, descriptionModal) =>{
+
+    
+    console.log(NameModal, ImgModal, CategoryNameModal, PriceModal, descriptionModal);
+
+    let getModalDiv = document.getElementById('modal-container');
+    let creatModalDiv = document.createElement('div');
+
+    creatModalDiv.innerHTML = ` <div class="Info  px-2 ">
+            <h1 class="font-bold text-lg" >${NameModal}</h1>
+            <img class="w-[250px] h-[200px] border border-green-950 " src="${ImgModal}" alt="">
+            <h1 class="font-bold" >Cetegory: ${CategoryNameModal}</h1>
+            <h1 class="text-sm font-bold">Price: ${PriceModal} <span></span> tk</h1>
+            <p class="text-xs my-2 text-justify">${descriptionModal}</p>
+        </div>`;
+    
+    getModalDiv.appendChild(creatModalDiv);
+
+
+    document.getElementById('my_modal_5').showModal()
+
+
+
+
+};
+
 
 // Updating pric and removing the cart
 
@@ -10,7 +38,7 @@ let updateCartBox = removedCartPrice =>{
 
     priceArray = priceArray.filter(number => number !== removedCartPrice);
 
-    console.log(priceArray);
+    // console.log(priceArray);
 
     let Reamingtotal = priceArray.reduce((sum, current) => sum + current, 0);
 
@@ -63,7 +91,7 @@ let addAndSum = (Name, Price, id) =>{
 
 // This function is being called from the above function upon clicking on cross button and removes it from the cart list------------------------------------------------------------
 function removeCart(CrossCartID) {
-    console.log("from removeCart", CrossCartID);
+    // console.log("from removeCart", CrossCartID);
 
     let cartBoxDel = document.getElementById(`cart-list-${CrossCartID}`);
     cartBoxDel.remove();
@@ -110,7 +138,7 @@ let displayPlants = (treearr) =>{
 
                 <img class=" w-full h-[250px] bg-cover rounded-md" src="${pImg}" alt="">
 
-                <h1 class="text-sm font-bold my-1" >${pName}</h1>
+                <button id="modal-btn-${pId}" onclick="displayModalData('${pName}', '${pImg}', '${pCat}', ${pPrice}, '${pDes}')" class="text-sm font-bold p-1 bg-gray-400 rounded-md my-1" >${pName}</button>
 
                 <p class="text-xs text-justify hover:bg-green-200" >${pDes}</p>
 
@@ -127,9 +155,12 @@ let displayPlants = (treearr) =>{
             </div>`;
 
         parentDiv.appendChild(newDiv);
+
+        
+
     }
 
-}
+};
 
 // Completed
 //==============================================================================
