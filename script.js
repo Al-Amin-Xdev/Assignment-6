@@ -1,22 +1,49 @@
+
+// Updating pric and removing the cart
+
+let priceArray = []; // All the price has been stored
+
+let updateCartBox = removedCartPrice =>{
+
+    // Rmove the price got from the parameter from the array by map method
+
+    priceArray = priceArray.filter(number => number !== removedCartPrice);
+
+    console.log(priceArray);
+
+    let Reamingtotal = priceArray.reduce((sum, current) => sum + current, 0);
+
+
+    
+
+    // Update the price by deducting from the totall
+
+    let getTotalElement = document.getElementById('total-display');
+
+    // Update the UI inner text
+    getTotalElement.innerText = Reamingtotal;
+
+
+};
+
 //Adding the plants to cart and summing up the price to show on the cart-box
 
-let priceArray = [];
-console.log("Price array",priceArray);
 
-let addAndSum = (Name, Price) =>{
+
+let addAndSum = (Name, Price, id) =>{
 
     // Get the cart-holding column container
     let cartDiv = document.getElementById('cart-box');
 
     // Creat a div container to show in ui
     let newCart = document.createElement('div');
-    newCart.innerHTML = ` <div class="cart-list p-1 bg- bg-green-400 rounded-md m-1">
+    newCart.innerHTML = ` <div id="cart-list-${id}"  class=" p-1  bg-green-400 rounded-md m-1">
 
                 <div class="top font-bold flex justify-between shadow-2xl md:min-w-[80px]">
                     <h1 class="text-[15px] md:text-xs">${Name}</h1>
-                    <button><i class="fa-solid fa-square-xmark"></i></button>
+                    <button id="cross-btn-${Price}" ><i onclick="updateCartBox(${Price});removeCart(${id})" class="fa-solid fa-square-xmark"></i></button>
                 </div>
-                <h1 class="font-bold text-right md:text-xs" >${Price}<span> tk</span></h1>
+                <h1 class="font-bold text-letf md:text-xs" >${Price}<span> tk</span> </h1>
             </div>`;
     
     // Append the child div to parent dive
@@ -26,24 +53,21 @@ let addAndSum = (Name, Price) =>{
 
     priceArray.push(Price);
     let total = priceArray.reduce((sum, current) => sum + current, 0);
-    console.log(total);
 
     // Get the container or element where the total will be shown
     let cartPriceDiv = document.getElementById('total-display');
-    cartPriceDiv.innerText = total;
-
-
-
-    
-
-
-
+    cartPriceDiv.innerHTML = `${total} tk`;
 
 };
 
+// This function is being called from the above function upon clicking on cross button and removes it from the cart list------------------------------------------------------------
+function removeCart(CrossCartID) {
+    console.log("from removeCart", CrossCartID);
 
-
-
+    let cartBoxDel = document.getElementById(`cart-list-${CrossCartID}`);
+    cartBoxDel.remove();
+   
+};
 
 
                   
@@ -94,7 +118,7 @@ let displayPlants = (treearr) =>{
                     <span class="text-xs font-bold" >${pPrice}<span> tk</span></span>
                 </div>
                 
-                <div id="cart-btn-${pId}" onclick="addAndSum('${pName}', ${pPrice})" class="card-button flex justify-center mt-4">
+                <div id="cart-btn-${pId}" onclick="addAndSum('${pName}', ${pPrice}, ${pId})" class="card-button flex justify-center mt-4">
                     <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >
                     Add to Cart</button>
                 </div>
@@ -300,164 +324,6 @@ displayCategory();
 
 
 
-// Adding plants to cards and suming up the price
-
-
-
-
-
-
-// // Load all the plants alltogether
-
-// let allPlantApi = "https://openapi.programming-hero.com/api/plants";
-
-// async function loadAllPlant (url) {
-
-//     try {
-
-//         let response = await fetch(url);
-//         let responseConvertedToJson = await response.json();
-
-//         // rawArray variable is the Array from server
-
-//         let rawArrayOfTress = responseConvertedToJson.plants;
-
-//         // console.log(rawArrayOfTress);
-
-//         rawArrayOfTress.forEach(arrayItem => {
-            
-//             // Data to be shown
-//             let plantImage = arrayItem.image;
-//             let plantNam = arrayItem.name;
-//             let plantDescription = arrayItem.description;
-//             let plantCategory = arrayItem.category;
-//             let plantPrice = arrayItem.price;
-//             let itemid = arrayItem.id;
-            
-
-
-//             let getTreeDataDiv = document.getElementById('tree-data');
-
-//             let newlyCreatedDivForTreeData = document.createElement('div');
-
-//             newlyCreatedDivForTreeData.innerHTML = `<div class="card-1 p-1 border-2 w-full h-auto rounded-md md:w-full ">
-
-//                 <img class=" w-full h-[150px] bg-cover rounded-md" src="${plantImage}" alt="">
-
-//                 <h1 class="text-sm font-bold my-1" >${plantNam}</h1>
-
-//                 <p class="text-xs text-justify" >${plantDescription}</p>
-
-//                 <div class="tree-type flex flex-row  justify-between mt-2 p-1">
-//                     <span class="text-xs font-bold bg-green-600 rounded-md px-2" >${plantCategory}</span>
-//                     <span class="text-xs font-bold" >${plantPrice}</span>
-//                 </div>
-                
-//                 <div id="btndiv-${itemid}" onclick="getprice(${plantPrice}); addToCart('${plantNam}', ${plantPrice})" class="card-button flex justify-center mt-4">
-//                     <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >Add to Cart</button>
-//                 </div>
-
-//             </div>`;
-    
-//             getTreeDataDiv.appendChild(newlyCreatedDivForTreeData);
-        
-
-           
-//         });
-
-//     } catch (error) {
-//         console.log("Error message:-", error);
-//     }
-    
-// }
-
-// loadAllPlant (allPlantApi);
-
-// get the price
-
-let pricarray = [];
-
-
-function getprice(price){
-    // Ensure numeric value
-    pricarray.push(Number(price));
-
-    let total = 0;
-
-    for(let p of pricarray){
-        total += p;
-    }
-
-    let getCartheading = document.getElementById('total-display');
-    // console.log(getCartDiv);
-    getCartheading.innerText = total;
-
-    // removeCart(total);
-    
-};
-
-
-
-// add to cart function
-
-let rempricearr = [];
-
-console.log(rempricearr);
-
-function addToCart(name, price) {
-
-            let getCartDiv = document.getElementById('cart-box');
-            // console.log(getCartDiv);
-            let createdDiv = document.createElement('div');
-            
-            createdDiv.innerHTML = `<div class="cart-list p-1 bg- bg-green-400 rounded-md m-1">
-
-                <div class="top font-bold flex justify-between shadow-2xl md:min-w-[80px]">
-                    <h1 class="text-[15px] md:text-xs">${name} </h1>
-                    <button><i class="fa-solid fa-square-xmark"></i></button>
-                </div>
-                <h1 class="cart-price font-bold text-right md:text-xs" >${price} Tk</h1>
-            </div>`;
-
-            getCartDiv.appendChild(createdDiv);
-
-             const cartBox = document.getElementById("cart-box");
-
-            cartBox.addEventListener("click", (event) => {
-
-    // check if  icon clicked
-
-             if (event.target.classList.contains("fa-square-xmark")) {
-
-        // remove only the nearest .cart-list
-
-            const listItem = event.target.closest(".cart-list");
-            if (listItem) {
-
-                
-
-                const priceElem = listItem.querySelector(".cart-price");
-                const rprice = priceElem ? parseInt(priceElem.innerText) : 0;
-
-                rempricearr.push(Number(rprice));
-                // console.log(rempricearr);
-
-                const rtotal = rempricearr.reduce((sum, p) => sum + p, 0);
-                // console.log("Removed total:", typeof rtotal);
-
-                listItem.remove();
-
-                
-                // const totalDisplay = document.getElementById("total-display");
-                // totalDisplay.innerText = remaing ;
-
-            }
-        }
-        
-    });         
-
-};
-
 
 
 // Removing the cart completed it stays right here no need to move into a function to call
@@ -466,48 +332,8 @@ function addToCart(name, price) {
 
 
 
-// function removeCart(totalp) {
-
-//     const cartBox = document.getElementById("cart-box");
-
-//     cartBox.addEventListener("click", (event) => {
-
-//     // check if  icon clicked
-
-//         if (event.target.classList.contains("fa-square-xmark")) {
-
-//         // remove only the nearest .cart-list
-
-//             const listItem = event.target.closest(".cart-list");
-//             if (listItem) {
-
-                
-
-//                 const priceElem = listItem.querySelector(".cart-price");
-//                 const rprice = priceElem ? parseInt(priceElem.innerText) : 0;
-
-//                 rempricearr.push(Number(rprice));
-
-//                 const rtotal = rempricearr.reduce((sum, p) => sum + p, 0);
-//                 console.log("Removed total:", rtotal);
-
-//                 listItem.remove();
-
-                
-//                 // const totalDisplay = document.getElementById("total-display");
-//                 // totalDisplay.innerText = remaing ;
-
-//             }
-//         }
-        
-//     });
-
-// };
 
 
-
-
-// removeCart();
 
 
 
