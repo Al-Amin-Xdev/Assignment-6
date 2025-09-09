@@ -1,12 +1,119 @@
+//Adding the plants to cart and summing up the price to show on the cart-box
+
+let priceArray = [];
+console.log("Price array",priceArray);
+
+let addAndSum = (Name, Price) =>{
+
+    // Get the cart-holding column container
+    let cartDiv = document.getElementById('cart-box');
+
+    // Creat a div container to show in ui
+    let newCart = document.createElement('div');
+    newCart.innerHTML = ` <div class="cart-list p-1 bg- bg-green-400 rounded-md m-1">
+
+                <div class="top font-bold flex justify-between shadow-2xl md:min-w-[80px]">
+                    <h1 class="text-[15px] md:text-xs">${Name}</h1>
+                    <button><i class="fa-solid fa-square-xmark"></i></button>
+                </div>
+                <h1 class="font-bold text-right md:text-xs" >${Price}<span> tk</span></h1>
+            </div>`;
+    
+    // Append the child div to parent dive
+    cartDiv.appendChild(newCart);
+
+    // Storing price in an arra to sum up
+
+    priceArray.push(Price);
+    let total = priceArray.reduce((sum, current) => sum + current, 0);
+    console.log(total);
+
+    // Get the container or element where the total will be shown
+    let cartPriceDiv = document.getElementById('total-display');
+    cartPriceDiv.innerText = total;
+
+
+
+    
+
+
+
+
+};
 
 
 
 
 
 
-// Middle Section-Dynamic Loading All Plants info by Id Category
-// ================================
+                  
+                  
+                  // Get all the plants upon loading the page
+//===========================================================================
 
+// This arrow function loads the api and call a function below it------
+
+let loadPlants = () =>{
+    
+    fetch("https://openapi.programming-hero.com/api/plants")
+    .then( (plantjson) => plantjson.json())
+    .then( (plantsarr) => displayPlants(plantsarr.plants));
+}
+
+loadPlants();
+
+let displayPlants = (treearr) =>{
+
+    // Get the container and empty it where the data will be shown
+
+    let parentDiv = document.getElementById('tree-data');
+    parentDiv.innerHTML = "";
+
+    for(let plant of treearr){
+
+        // Extracting all the information to be shown
+        let pImg = plant.image;
+        let pName = plant.name;
+        let pDes = plant.description;
+        let pCat = plant.category;
+        let pPrice = plant.price;
+        let pId = plant.id;
+
+
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = `<div class="card-1 p-1  border-2 w-full h-[450px] rounded-md md:w-full ">
+
+                <img class=" w-full h-[250px] bg-cover rounded-md" src="${pImg}" alt="">
+
+                <h1 class="text-sm font-bold my-1" >${pName}</h1>
+
+                <p class="text-xs text-justify hover:bg-green-200" >${pDes}</p>
+
+                <div class="tree-type flex flex-row  justify-between mt-2 p-1">
+                    <span class="text-xs font-bold bg-green-600 rounded-md px-2" >${pCat}</span>
+                    <span class="text-xs font-bold" >${pPrice}<span> tk</span></span>
+                </div>
+                
+                <div id="cart-btn-${pId}" onclick="addAndSum('${pName}', ${pPrice})" class="card-button flex justify-center mt-4">
+                    <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >
+                    Add to Cart</button>
+                </div>
+
+            </div>`;
+
+        parentDiv.appendChild(newDiv);
+    }
+
+}
+
+// Completed
+//==============================================================================
+
+
+
+
+ // Middle Section-Dynamic Loading All Plants info by Id Category
+ //  // ==============
 // Loading the category's Plants family dynamically
 //==============================================================================================================
 
@@ -73,6 +180,7 @@ let loadCategoryPlants = (id) =>{
 };
 
 // 2nd Function
+//--------------------
 
 let displayPlantsByCategory =  plantcategory =>{
 
@@ -97,9 +205,9 @@ let displayPlantsByCategory =  plantcategory =>{
 
         let newPlantDiv = document.createElement('div');
         
-        newPlantDiv.innerHTML = ` <div class="card-1 p-1  border-2 w-full h-[330px] rounded-md md:w-full ">
+        newPlantDiv.innerHTML = ` <div class="card-1 p-1  border-2 w-full h-[450px] rounded-md md:w-full ">
 
-                <img class=" w-full h-[150px] bg-cover rounded-md" src="${plantimg}" alt="">
+                <img class=" w-full h-[250px] bg-cover rounded-md" src="${plantimg}" alt="">
 
                 <h1 class="text-sm font-bold my-1" >${plantName}</h1>
 
@@ -107,10 +215,10 @@ let displayPlantsByCategory =  plantcategory =>{
 
                 <div class="tree-type flex flex-row  justify-between mt-2 p-1">
                     <span class="text-xs font-bold bg-green-600 rounded-md px-2" >${plantCategory}</span>
-                    <span class="text-xs font-bold" >${plantPrice}</span>
+                    <span class="text-xs font-bold" >${plantPrice}<span> tk</span></span>
                 </div>
                 
-                <div id="cart-btn-${plantAddCartButtonId}" class="card-button flex justify-center mt-4">
+                <div id="cart-btn-${plantAddCartButtonId}" onclick="addAndSum('${plantName}', ${plantPrice})" class="card-button flex justify-center mt-4">
                     <button class="bg-green-700 rounded-md text-center text-sm font-bold text-white p-2" >
                     Add to Cart</button>
                 </div>
@@ -126,13 +234,8 @@ let displayPlantsByCategory =  plantcategory =>{
 
 };
 
-
-// Loading the category's Plants family dynamically with id is succesfull
-//==============================================================================================================
-
-
-
-
+//Completed successfully
+//================================================================================================
 
 
 
@@ -195,6 +298,9 @@ displayCategory();
 // Category Name loading completed succesfully
 //=============================================================================================================
 
+
+
+// Adding plants to cards and suming up the price
 
 
 
